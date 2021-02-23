@@ -1,0 +1,78 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>notes</title>
+  </head>
+  <body>
+    <nav>
+  
+    <a href="/" >
+      Home
+    </a>
+  
+    <a href="/about.html" >
+      About
+    </a>
+  
+    <a href="/blog.html" >
+      Blog
+    </a>
+  
+</nav>
+
+    <h1>notes</h1>
+<p>20 Aug 2018 - Kelly</p>
+
+<h1 id="what-can-neural-networks-reason-about">What Can Neural Networks Reason About?</h1>
+
+<p>https://arxiv.org/pdf/2011.08843.pdf</p>
+
+<h2 id="sample-complexity">Sample Complexity</h2>
+
+<p>The PAC learning framework measures how sample efficiently a learning algorithm $\mathcal{A}$ can approximate a function $g(x)$ as follows. For a dataset of size $M$, we say that $g$ is $(M,\epsilon,\delta)$-learnable with $\mathcal{A}$ if the learned approximation function $f=\mathcal{A}(\lbrace x_i,y_i\rbrace_{i=1}^M)$  satisfies:
+\(\mathbb{P}_{x\thicksim \mathcal{D}}[\| f(x)-g(x)\| \leq \epsilon]\geq 1-\delta\)
+The sample complexity $\underline{\mathcal{C_A}(g,\epsilon,\delta)}$ is then just the minimum value of $M$ such that $g$ is $(M,\epsilon,\delta)$ learnable with $\mathcal{A}$</p>
+
+<p>Paper from <a href="https://arxiv.org/pdf/1901.08584.pdf">Arora et al. (2019)</a> shows that overparameterized MLPs have low sample complexity when learning functions that are well approximated by Taylor series</p>
+
+<h2 id="algorithmic-alignment">Algorithmic Alignment</h2>
+
+<p>Let $\mathcal{N}$ be a neural network with modules $\mathcal{N}_1,…,\mathcal{N}_n$. $\mathcal{N}$ is said to be $(M,\epsilon,\delta)$-algorithmically aligned with a reasoning function $g$ if the following properties are met:</p>
+
+<ol>
+  <li>There exist functions $f_1,…,f_n$ which allow $\mathcal{N}$ to simulate $g$</li>
+  <li>There are learning algorithims $\mathcal{A}<em>1,..,\mathcal{A}_n$ such that $n \cdot \text{max}_i\mathcal{C}</em>{\mathcal{A}_i}(f_i,\epsilon,\delta)\leq M$</li>
+</ol>
+
+<p>Under a strict set of constraints, they show that as long as $\mathcal{N}$ and $g$ are $(M,\epsilon,\delta)$-algorithmically aligned, then $g$ is $(M,O(\epsilon),O(\delta))$-learnable by $\mathcal{N}$. The constraints are as follows:</p>
+
+<ol>
+  <li>Algorithm stability</li>
+  <li>Sequential learning with auxillary labels</li>
+  <li>Lipschitzness of learned functions</li>
+</ol>
+
+<p>Consequence: If universe S has objects $X_1,..,X_{l}$ and $g(S)=\sum_{i,j}(X_i-X_j)^2$ then an MLP is going to be $O(l^2)$ times slower than GNN</p>
+
+<h2 id="effect-on-performance">Effect on Performance</h2>
+
+<p>MLPS, Deep Sets, and GNNs can all universally approximate any permutation-invariant reasoning function, but GNNs achieve far better test accuracy due to their superior generalization</p>
+
+<p>Claim 4.1 says that deep sets cannot learn pairwise relationships, so the only way for it to learn the reasoning function is for a single one of the MLP modules to learn a for loop. It seems like this would only actually happen with very little regularization and even if Deep Sets succeeded in minimizing the training loss, the learned for loops would not generalize.</p>
+
+<p>Not only does this result in high sample complexity, but it doesn’t allow generalization. The for loops memorized in the training phase are not transferrable to the test set, giving no generalizaiton whatsoever.</p>
+
+<h2 id="experiments">Experiments</h2>
+
+<h3 id="maximum-value-distance">Maximum Value Distance</h3>
+
+<h3 id="furthest-pair">Furthest Pair</h3>
+
+<h3 id="dynamic-programming">Dynamic Programming</h3>
+
+<h3 id="subset-sum">Subset Sum</h3>
+
+
+  </body>
+</html>

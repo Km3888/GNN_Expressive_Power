@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.0">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" /><updated>2021-02-23T16:51:04-05:00</updated><id>/feed.xml</id><entry><title type="html">notes</title><link href="/2018/08/20/What.html" rel="alternate" type="text/html" title="notes" /><published>2018-08-20T00:00:00-04:00</published><updated>2018-08-20T00:00:00-04:00</updated><id>/2018/08/20/What</id><content type="html" xml:base="/2018/08/20/What.html">&lt;h1 id=&quot;what-can-neural-networks-reason-about&quot;&gt;What Can Neural Networks Reason About?&lt;/h1&gt;
+
+&lt;p&gt;https://arxiv.org/pdf/2011.08843.pdf&lt;/p&gt;
+
+&lt;h2 id=&quot;sample-complexity&quot;&gt;Sample Complexity&lt;/h2&gt;
+
+&lt;p&gt;The PAC learning framework measures how sample efficiently a learning algorithm $\mathcal{A}$ can approximate a function $g(x)$ as follows. For a dataset of size $M$, we say that $g$ is $(M,\epsilon,\delta)$-learnable with $\mathcal{A}$ if the learned approximation function $f=\mathcal{A}(\lbrace x_i,y_i\rbrace_{i=1}^M)$  satisfies:
+\(\mathbb{P}_{x\thicksim \mathcal{D}}[\| f(x)-g(x)\| \leq \epsilon]\geq 1-\delta\)
+The sample complexity $\underline{\mathcal{C_A}(g,\epsilon,\delta)}$ is then just the minimum value of $M$ such that $g$ is $(M,\epsilon,\delta)$ learnable with $\mathcal{A}$&lt;/p&gt;
+
+&lt;p&gt;Paper from &lt;a href=&quot;https://arxiv.org/pdf/1901.08584.pdf&quot;&gt;Arora et al. (2019)&lt;/a&gt; shows that overparameterized MLPs have low sample complexity when learning functions that are well approximated by Taylor series&lt;/p&gt;
+
+&lt;h2 id=&quot;algorithmic-alignment&quot;&gt;Algorithmic Alignment&lt;/h2&gt;
+
+&lt;p&gt;Let $\mathcal{N}$ be a neural network with modules $\mathcal{N}_1,…,\mathcal{N}_n$. $\mathcal{N}$ is said to be $(M,\epsilon,\delta)$-algorithmically aligned with a reasoning function $g$ if the following properties are met:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;There exist functions $f_1,…,f_n$ which allow $\mathcal{N}$ to simulate $g$&lt;/li&gt;
+  &lt;li&gt;There are learning algorithims $\mathcal{A}&lt;em&gt;1,..,\mathcal{A}_n$ such that $n \cdot \text{max}_i\mathcal{C}&lt;/em&gt;{\mathcal{A}_i}(f_i,\epsilon,\delta)\leq M$&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Under a strict set of constraints, they show that as long as $\mathcal{N}$ and $g$ are $(M,\epsilon,\delta)$-algorithmically aligned, then $g$ is $(M,O(\epsilon),O(\delta))$-learnable by $\mathcal{N}$. The constraints are as follows:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Algorithm stability&lt;/li&gt;
+  &lt;li&gt;Sequential learning with auxillary labels&lt;/li&gt;
+  &lt;li&gt;Lipschitzness of learned functions&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Consequence: If universe S has objects $X_1,..,X_{l}$ and $g(S)=\sum_{i,j}(X_i-X_j)^2$ then an MLP is going to be $O(l^2)$ times slower than GNN&lt;/p&gt;
+
+&lt;h2 id=&quot;effect-on-performance&quot;&gt;Effect on Performance&lt;/h2&gt;
+
+&lt;p&gt;MLPS, Deep Sets, and GNNs can all universally approximate any permutation-invariant reasoning function, but GNNs achieve far better test accuracy due to their superior generalization&lt;/p&gt;
+
+&lt;p&gt;Claim 4.1 says that deep sets cannot learn pairwise relationships, so the only way for it to learn the reasoning function is for a single one of the MLP modules to learn a for loop. It seems like this would only actually happen with very little regularization and even if Deep Sets succeeded in minimizing the training loss, the learned for loops would not generalize.&lt;/p&gt;
+
+&lt;p&gt;Not only does this result in high sample complexity, but it doesn’t allow generalization. The for loops memorized in the training phase are not transferrable to the test set, giving no generalizaiton whatsoever.&lt;/p&gt;
+
+&lt;h2 id=&quot;experiments&quot;&gt;Experiments&lt;/h2&gt;
+
+&lt;h3 id=&quot;maximum-value-distance&quot;&gt;Maximum Value Distance&lt;/h3&gt;
+
+&lt;h3 id=&quot;furthest-pair&quot;&gt;Furthest Pair&lt;/h3&gt;
+
+&lt;h3 id=&quot;dynamic-programming&quot;&gt;Dynamic Programming&lt;/h3&gt;
+
+&lt;h3 id=&quot;subset-sum&quot;&gt;Subset Sum&lt;/h3&gt;</content><author><name>Kelly</name></author><summary type="html">What Can Neural Networks Reason About?</summary></entry><entry><title type="html">Test</title><link href="/2018/08/20/test.html" rel="alternate" type="text/html" title="Test" /><published>2018-08-20T00:00:00-04:00</published><updated>2018-08-20T00:00:00-04:00</updated><id>/2018/08/20/test</id><content type="html" xml:base="/2018/08/20/test.html">&lt;p&gt;A banana is an edible fruit – botanically a berry – produced by several kinds
+of large herbaceous flowering plants in the genus Musa.&lt;/p&gt;
+
+&lt;p&gt;In some countries, bananas used for cooking may be called “plantains”,
+distinguishing them from dessert bananas. The fruit is variable in size, color,
+and firmness, but is usually elongated and curved, with soft flesh rich in
+starch covered with a rind, which may be green, yellow, red, purple, or brown
+when ripe.&lt;/p&gt;</content><author><name>jill</name></author><summary type="html">A banana is an edible fruit – botanically a berry – produced by several kinds of large herbaceous flowering plants in the genus Musa.</summary></entry></feed>

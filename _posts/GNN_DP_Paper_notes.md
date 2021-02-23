@@ -1,0 +1,60 @@
+---
+layout: post
+author: Kelly
+title: What Can Neural Networks Reason About?
+---
+
+# What Can Neural Networks Reason About?
+
+https://arxiv.org/pdf/2011.08843.pdf
+
+## Sample Complexity
+
+The PAC learning framework measures how sample efficiently a learning algorithm $\mathcal{A}$ can approximate a function $g(x)$ as follows. For a dataset of size $M$, we say that $g$ is $(M,\epsilon,\delta)$-learnable with $\mathcal{A}$ if the learned approximation function $f=\mathcal{A}(\lbrace x_i,y_i\rbrace_{i=1}^M)$  satisfies:
+$$
+\mathbb{P}_{x\thicksim \mathcal{D}}[\| f(x)-g(x)\| \leq \epsilon]\geq 1-\delta
+$$
+The sample complexity $\underline{\mathcal{C_A}(g,\epsilon,\delta)}$ is then just the minimum value of $M$ such that $g$ is $(M,\epsilon,\delta)$ learnable with $\mathcal{A}$
+
+Paper from [Arora et al. (2019)](https://arxiv.org/pdf/1901.08584.pdf) shows that overparameterized MLPs have low sample complexity when learning functions that are well approximated by Taylor series
+
+## Algorithmic Alignment
+
+Let $\mathcal{N}$ be a neural network with modules $\mathcal{N}_1,...,\mathcal{N}_n$. $\mathcal{N}$ is said to be $(M,\epsilon,\delta)$-algorithmically aligned with a reasoning function $g$ if the following properties are met:
+
+1. There exist functions $f_1,...,f_n$ which allow $\mathcal{N}$ to simulate $g$
+2. There are learning algorithims $\mathcal{A}_1,..,\mathcal{A}_n$ such that $n \cdot \text{max}_i\mathcal{C}_{\mathcal{A}_i}(f_i,\epsilon,\delta)\leq M$ 
+
+Under a strict set of constraints, they show that as long as $\mathcal{N}$ and $g$ are $(M,\epsilon,\delta)$-algorithmically aligned, then $g$ is $(M,O(\epsilon),O(\delta))$-learnable by $\mathcal{N}$. The constraints are as follows:
+
+1. Algorithm stability
+2. Sequential learning with auxillary labels
+3. Lipschitzness of learned functions
+
+Consequence: If universe S has objects $X_1,..,X_{l}$ and $g(S)=\sum_{i,j}(X_i-X_j)^2$ then an MLP is going to be $O(l^2)$ times slower than GNN
+
+## Effect on Performance
+
+MLPS, Deep Sets, and GNNs can all universally approximate any permutation-invariant reasoning function, but GNNs achieve far better test accuracy due to their superior generalization
+
+Claim 4.1 says that deep sets cannot learn pairwise relationships, so the only way for it to learn the reasoning function is for a single one of the MLP modules to learn a for loop. It seems like this would only actually happen with very little regularization and even if Deep Sets succeeded in minimizing the training loss, the learned for loops would not generalize.
+
+
+
+ Not only does this result in high sample complexity, but it doesn't allow generalization. The for loops memorized in the training phase are not transferrable to the test set, giving no generalizaiton whatsoever.
+
+## Experiments
+
+### Maximum Value Distance
+
+
+
+### Furthest Pair
+
+
+
+### Dynamic Programming
+
+
+
+### Subset Sum
